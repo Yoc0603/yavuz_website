@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yavuz Orhan Candemir — Portfolio</title>
+  <meta name="description" content="Yavuz Orhan Candemir kişisel portfolio sitesi" />
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --card: rgba(255,255,255,.04);
+      --border: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.66);
+      --muted2: rgba(255,255,255,.48);
+      --accent: #39ffb6;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --r: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(57,255,182,.10), transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, rgba(120,120,255,.10), transparent 60%),
+        radial-gradient(900px 600px at 50% 95%, rgba(255,255,255,.05), transparent 65%),
+        var(--bg);
+      line-height:1.5;
+    }
+
+    a{ color: inherit; text-decoration:none; }
+    .wrap{ max-width: 1050px; margin: 0 auto; padding: 28px 18px 60px; }
+
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 14px 0;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,12,16,.75), rgba(11,12,16,.35));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .topbar .inner{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      max-width:1050px; margin:0 auto; padding: 0 18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:600; letter-spacing:.2px;
+    }
+    .dot{ width:10px; height:10px; border-radius:99px; background: var(--accent); box-shadow: 0 0 18px rgba(57,255,182,.55); }
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.16); color: var(--text); }
+
+    .hero{
+      margin-top: 22px;
+      padding: 26px;
+      border-radius: calc(var(--r) + 6px);
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-120px -120px auto auto;
+      width: 320px; height:320px;
+      background: radial-gradient(circle at 30% 30%, rgba(57,255,182,.22), transparent 60%);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      align-items:start;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .pulse{
+      width:8px; height:8px; border-radius:99px; background: var(--accent);
+      box-shadow: 0 0 0 0 rgba(57,255,182,.55);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse{
+      0%{ box-shadow: 0 0 0 0 rgba(57,255,182,.45); }
+      70%{ box-shadow: 0 0 0 12px rgba(57,255,182,0); }
+      100%{ box-shadow: 0 0 0 0 rgba(57,255,182,0); }
+    }
+
+    h1{ margin:0; font-size: clamp(28px, 4vw, 46px); letter-spacing:-.6px; line-height:1.12; }
+    .subtitle{ margin: 10px 0 0; color: var(--muted); font-size: 15px; max-width: 58ch; }
+    .meta-row{ margin-top: 14px; display:flex; flex-wrap:wrap; gap:10px; }
+    .chip{
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cta-row{ margin-top: 18px; display:flex; gap:10px; flex-wrap:wrap; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
+    .btn.primary{
+      border-color: rgba(57,255,182,.35);
+      background: rgba(57,255,182,.10);
+    }
+    .btn.primary:hover{ background: rgba(57,255,182,.14); }
+
+    .sidecard{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 16px;
+    }
+    .sidecard h3{ margin:0 0 10px; font-size: 14px; color: var(--muted); letter-spacing:.2px; }
+    .kv{ display:flex; justify-content:space-between; gap:10px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.06); }
+    .kv:first-of-type{ border-top:none; padding-top:0; }
+    .k{ color: var(--muted2); font-size: 12px; }
+    .v{ color: var(--text); font-size: 13px; text-align:right; }
+
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    section.card{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 18px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.20);
+    }
+    section.card h2{
+      margin:0 0 10px;
+      font-size: 16px;
+      letter-spacing:.2px;
+    }
+    .muted{ color: var(--muted); font-size: 14px; margin:0; }
+
+    .timeline{ display:flex; flex-direction:column; gap: 12px; margin-top: 12px; }
+    .item{
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.02);
+      border-radius: 14px;
+      padding: 14px;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .item:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.16); }
+    .item-top{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+    .role{ font-weight:600; }
+    .period{ color: var(--muted2); font-size: 12px; }
+    .where{ color: var(--muted); font-size: 13px; margin-top: 4px; }
+    ul{ margin: 10px 0 0 18px; color: var(--muted); font-size: 13px; }
+    li{ margin: 6px 0; }
+
+    .projects{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .proj{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.02);
+      padding: 14px;
+      transition: transform .15s ease, border-color .15s ease;
+      min-height: 140px;
+    }
+    .proj:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.16); }
+    .proj a{ display:inline-flex; gap:8px; align-items:center; color: var(--text); }
+    .proj p{ margin:0; color: var(--muted); font-size: 13px; }
+    .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; }
+    .tag{
+      font-size: 12px;
+      color: rgba(57,255,182,.9);
+      border: 1px solid rgba(57,255,182,.22);
+      background: rgba(57,255,182,.08);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .contact{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    footer{
+      margin-top: 18px;
+      color: var(--muted2);
+      font-size: 12px;
+      text-align:center;
+      padding: 18px 0 0;
+    }
+
+    @media (max-width: 860px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+      .projects{ grid-template-columns: 1fr; }
+    }
+
+    /* CV Drawer */
+    .cv-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+      z-index: 50;
+    }
+    .cv-drawer{
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100dvh;
+      width: min(920px, 92vw);
+      background: rgba(12,13,18,.92);
+      border-left: 1px solid rgba(255,255,255,.10);
+      box-shadow: -30px 0 80px rgba(0,0,0,.55);
+      transform: translateX(105%);
+      transition: transform .22s ease;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+    }
+    .cv-header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 14px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+    .cv-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 600;
+      letter-spacing: .2px;
+    }
+    .cv-sub{
+      color: var(--muted2);
+      font-size: 12px;
+      margin-left: 10px;
+      font-weight: 500;
+    }
+    .cv-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .iconbtn{
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      font-size: 13px;
+    }
+    .iconbtn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.18);
+    }
+    .cv-body{
+      padding: 12px;
+      flex: 1;
+      min-height: 0;
+    }
+    .cv-frame{
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      background: rgba(255,255,255,.02);
+      overflow: hidden;
+    }
+    .cv-frame iframe, .cv-frame embed{
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display:block;
+    }
+    .cv-open .cv-overlay{
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .cv-open .cv-drawer{
+      transform: translateX(0);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="inner">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Yavuz Orhan Candemir</span>
+      </div>
+      <div class="nav">
+        <a class="pill" href="#about">Hakkımda</a>
+        <a class="pill" href="#career">Kariyer</a>
+        <a class="pill" href="#projects">Projeler</a>
+        <a class="pill" href="#contact">İletişim</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="badge"><span class="pulse"></span> Şu an projelere / staja açığım</div>
+          <h1>Yavuz Orhan Candemir</h1>
+          <p class="subtitle">
+            Minimal ama sağlam işler yapan bir <span style="color:var(--text);">Developer</span>.
+            iOS • Web • Sistemler.
+          </p>
+
+          <div class="meta-row">
+            <span class="chip">Warsaw / Remote</span>
+            <span class="chip">Swift • HTML/CSS • SQL</span>
+            <span class="chip">Açık: Freelance & Internship</span>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn primary" href="mailto:yavuzorhancandemir@gmail.com">Mail at</a>
+            <button class="btn" type="button" data-open-cv>CV (PDF)</button>
+            <a class="btn" href="#projects">Projeleri gör</a>
+            <a class="btn" href="https://github.com/Yoc0603" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/yavuz-orhan-candemir/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+
+        <aside class="sidecard">
+          <h3>Hızlı Bilgiler</h3>
+          <div class="kv"><div class="k">Odak</div><div class="v">Mobile / Web</div></div>
+          <div class="kv"><div class="k">Stack</div><div class="v">Swift, JS, SQL</div></div>
+          <div class="kv"><div class="k">Şu an</div><div class="v">Proje geliştiriyorum</div></div>
+          <div class="kv"><div class="k">Dil</div><div class="v">TR / EN</div></div>
+        </aside>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section id="about" class="card">
+        <h2>Hakkımda</h2>
+        <p class="muted">
+          Detaylara önem veren bir iOS developer’ım. Gerçek dünya verisini interaktif mobil deneyimlere dönüştürmeyi seviyorum.
+          Şu sıralar OBD cihazlarıyla araçtan veri alıp bunu yarış/simülasyon mantığıyla oyuna çeviren bir iOS uygulaması konsepti üzerinde çalışıyorum.
+          Swift, Xcode, Firebase; ayrıca IoT entegrasyonu ve mobil performans optimizasyonu alanlarına ilgim var.
+        </p>
+      </section>
+
+      <section id="career" class="card">
+        <h2>Kariyer</h2>
+        <p class="muted">Eğitim / deneyim / önemli dönemler.</p>
+
+        <div class="timeline">
+          <div class="item">
+            <div class="item-top">
+              <div class="role">BSc Computer Science</div>
+              <div class="period">09/2022 — 09/2026 (Expected)</div>
+            </div>
+            <div class="where">Uniwersytet VIZJA — Warsaw, Poland</div>
+            <ul>
+              <li>Relevant: OOP, Mobile App Development, Software Engineering</li>
+              <li>Data Structures & Algorithms, HCI, Database Systems, IoT</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-top">
+              <div class="role">Projeler / Dersler</div>
+              <div class="period">2024 — 2025</div>
+            </div>
+            <div class="where">Kısa açıklama</div>
+            <ul>
+              <li>Database projesi: normalizasyon + view/procedure/trigger.</li>
+              <li>Linux 6.x: process hierarchy analizi (syscall).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section id="projects" class="card" style="margin-top:14px;">
+      <h2>Projeler</h2>
+      <p class="muted">En iyi projelerim.</p>
+
+      <div class="projects">
+        <div class="proj">
+          <a href="#" rel="noreferrer"><strong>Real Estate Price Prediction</strong> ↗</a>
+          <p>Veri hazırlama → modelleme → değerlendirme. Minimal bir özet.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">ML</span>
+            <span class="tag">Regression</span>
+          </div>
+        </div>
+
+        <div class="proj">
+          <a href="#" rel="noreferrer"><strong>Hospital Appointment App</strong> ↗</a>
+          <p>Kart tabanlı UI, randevu slot yönetimi, “My Appointments”.</p>
+          <div class="tags">
+            <span class="tag">Android</span>
+            <span class="tag">SQLite</span>
+            <span class="tag">UI</span>
+          </div>
+        </div>
+
+        <div class="proj">
+          <a href="#" rel="noreferrer"><strong>Barcode Scanner</strong> ↗</a>
+          <p>Barcode → DB kontrol → yes/no dönüş. Hızlı ve sade.</p>
+          <div class="tags">
+            <span class="tag">Mobile</span>
+            <span class="tag">DB</span>
+            <span class="tag">UX</span>
+          </div>
+        </div>
+
+        <div class="proj">
+          <a href="#" rel="noreferrer"><strong>Elixir Stopwatch</strong> ↗</a>
+          <p>State machine: ready/running/stopped, lap tracking.</p>
+          <div class="tags">
+            <span class="tag">Elixir</span>
+            <span class="tag">State</span>
+            <span class="tag">CLI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="card" style="margin-top:14px;">
+      <h2>İletişim</h2>
+      <p class="muted">
+        Proje, staj veya freelance için mail atman yeterli. Genelde hızlı dönerim.
+      </p>
+      <div class="contact">
+        <a class="btn primary" href="mailto:yavuzorhancandemir@gmail.com">yavuzorhancandemir@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/yavuz-orhan-candemir/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="btn" href="https://github.com/Yoc0603" target="_blank" rel="noreferrer">GitHub</a>
+        <button class="btn" type="button" data-open-cv>CV (PDF)</button>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="y"></span> Yavuz Orhan Candemir • Minimal portfolio
+    </footer>
+  </div>
+
+  <!-- CV Drawer -->
+  <div class="cv-overlay" data-close-cv></div>
+  <aside class="cv-drawer" aria-hidden="true" aria-label="CV Drawer">
+    <div class="cv-header">
+      <div class="cv-title">
+        <span class="dot"></span>
+        <span>CV</span>
+        <span class="cv-sub">Yavuz Orhan Candemir</span>
+      </div>
+      <div class="cv-actions">
+        <a class="iconbtn" href="YavuzCV.pdf" download>Download</a>
+        <button class="iconbtn" type="button" data-close-cv>Close</button>
+      </div>
+    </div>
+    <div class="cv-body">
+      <div class="cv-frame">
+        <iframe src="YavuzCV.pdf#view=FitH" title="Yavuz Orhan Candemir CV"></iframe>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    const openBtns = document.querySelectorAll("[data-open-cv]");
+    const closeBtns = document.querySelectorAll("[data-close-cv]");
+    const drawer = document.querySelector(".cv-drawer");
+
+    function openCV(){
+      document.body.classList.add("cv-open");
+      drawer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeCV(){
+      document.body.classList.remove("cv-open");
+      drawer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    openBtns.forEach(b => b.addEventListener("click", openCV));
+    closeBtns.forEach(b => b.addEventListener("click", closeCV));
+
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeCV();
+    });
+  </script>
+</body>
+</html>
