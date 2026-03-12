@@ -1,549 +1,604 @@
-<!doctype html>
-<html lang="tr">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yavuz Orhan Candemir — Portfolio</title>
-  <meta name="description" content="Yavuz Orhan Candemir kişisel portfolio sitesi" />
-  <style>
-    :root{
-      --bg: #0b0c10;
-      --card: rgba(255,255,255,.04);
-      --border: rgba(255,255,255,.10);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.66);
-      --muted2: rgba(255,255,255,.48);
-      --accent: #39ffb6;
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
-      --r: 18px;
-    }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color: var(--text);
-      background:
-        radial-gradient(900px 500px at 15% 10%, rgba(57,255,182,.10), transparent 60%),
-        radial-gradient(900px 500px at 85% 15%, rgba(120,120,255,.10), transparent 60%),
-        radial-gradient(900px 600px at 50% 95%, rgba(255,255,255,.05), transparent 65%),
-        var(--bg);
-      line-height:1.5;
-    }
-
-    a{ color: inherit; text-decoration:none; }
-    .wrap{ max-width: 1050px; margin: 0 auto; padding: 28px 18px 60px; }
-
-    .topbar{
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 14px 0;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(11,12,16,.75), rgba(11,12,16,.35));
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .topbar .inner{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      max-width:1050px; margin:0 auto; padding: 0 18px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px; font-weight:600; letter-spacing:.2px;
-    }
-    .dot{ width:10px; height:10px; border-radius:99px; background: var(--accent); box-shadow: 0 0 18px rgba(57,255,182,.55); }
-    .nav{
-      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,.09);
-      background: rgba(255,255,255,.03);
-      border-radius: 999px;
-      font-size: 13px;
-      color: var(--muted);
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-    }
-    .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.16); color: var(--text); }
-
-    .hero{
-      margin-top: 22px;
-      padding: 26px;
-      border-radius: calc(var(--r) + 6px);
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .hero:before{
-      content:"";
-      position:absolute; inset:-120px -120px auto auto;
-      width: 320px; height:320px;
-      background: radial-gradient(circle at 30% 30%, rgba(57,255,182,.22), transparent 60%);
-      transform: rotate(12deg);
-      pointer-events:none;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 18px;
-      align-items:start;
-    }
-    .badge{
-      display:inline-flex; align-items:center; gap:10px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-    .pulse{
-      width:8px; height:8px; border-radius:99px; background: var(--accent);
-      box-shadow: 0 0 0 0 rgba(57,255,182,.55);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse{
-      0%{ box-shadow: 0 0 0 0 rgba(57,255,182,.45); }
-      70%{ box-shadow: 0 0 0 12px rgba(57,255,182,0); }
-      100%{ box-shadow: 0 0 0 0 rgba(57,255,182,0); }
-    }
-
-    h1{ margin:0; font-size: clamp(28px, 4vw, 46px); letter-spacing:-.6px; line-height:1.12; }
-    .subtitle{ margin: 10px 0 0; color: var(--muted); font-size: 15px; max-width: 58ch; }
-    .meta-row{ margin-top: 14px; display:flex; flex-wrap:wrap; gap:10px; }
-    .chip{
-      padding: 8px 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .cta-row{ margin-top: 18px; display:flex; gap:10px; flex-wrap:wrap; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding: 11px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      font-size: 14px;
-      cursor: pointer;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-    }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
-    .btn.primary{
-      border-color: rgba(57,255,182,.35);
-      background: rgba(57,255,182,.10);
-    }
-    .btn.primary:hover{ background: rgba(57,255,182,.14); }
-
-    .sidecard{
-      border-radius: var(--r);
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding: 16px;
-    }
-    .sidecard h3{ margin:0 0 10px; font-size: 14px; color: var(--muted); letter-spacing:.2px; }
-    .kv{ display:flex; justify-content:space-between; gap:10px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.06); }
-    .kv:first-of-type{ border-top:none; padding-top:0; }
-    .k{ color: var(--muted2); font-size: 12px; }
-    .v{ color: var(--text); font-size: 13px; text-align:right; }
-
-    .grid{
-      margin-top: 18px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    section.card{
-      border-radius: var(--r);
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding: 18px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.20);
-    }
-    section.card h2{
-      margin:0 0 10px;
-      font-size: 16px;
-      letter-spacing:.2px;
-    }
-    .muted{ color: var(--muted); font-size: 14px; margin:0; }
-
-    .timeline{ display:flex; flex-direction:column; gap: 12px; margin-top: 12px; }
-    .item{
-      border: 1px solid rgba(255,255,255,.09);
-      background: rgba(255,255,255,.02);
-      border-radius: 14px;
-      padding: 14px;
-      transition: transform .15s ease, border-color .15s ease;
-    }
-    .item:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.16); }
-    .item-top{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
-    .role{ font-weight:600; }
-    .period{ color: var(--muted2); font-size: 12px; }
-    .where{ color: var(--muted); font-size: 13px; margin-top: 4px; }
-    ul{ margin: 10px 0 0 18px; color: var(--muted); font-size: 13px; }
-    li{ margin: 6px 0; }
-
-    .projects{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .proj{
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.09);
-      background: rgba(255,255,255,.02);
-      padding: 14px;
-      transition: transform .15s ease, border-color .15s ease;
-      min-height: 140px;
-    }
-    .proj:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.16); }
-    .proj a{ display:inline-flex; gap:8px; align-items:center; color: var(--text); }
-    .proj p{ margin:0; color: var(--muted); font-size: 13px; }
-    .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; }
-    .tag{
-      font-size: 12px;
-      color: rgba(57,255,182,.9);
-      border: 1px solid rgba(57,255,182,.22);
-      background: rgba(57,255,182,.08);
-      padding: 6px 10px;
-      border-radius: 999px;
-    }
-
-    .contact{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    footer{
-      margin-top: 18px;
-      color: var(--muted2);
-      font-size: 12px;
-      text-align:center;
-      padding: 18px 0 0;
-    }
-
-    @media (max-width: 860px){
-      .hero-grid{ grid-template-columns: 1fr; }
-      .grid{ grid-template-columns: 1fr; }
-      .projects{ grid-template-columns: 1fr; }
-    }
-
-    /* CV Drawer */
-    .cv-overlay{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(6px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .2s ease;
-      z-index: 50;
-    }
-    .cv-drawer{
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100dvh;
-      width: min(920px, 92vw);
-      background: rgba(12,13,18,.92);
-      border-left: 1px solid rgba(255,255,255,.10);
-      box-shadow: -30px 0 80px rgba(0,0,0,.55);
-      transform: translateX(105%);
-      transition: transform .22s ease;
-      z-index: 60;
-      display: flex;
-      flex-direction: column;
-    }
-    .cv-header{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 14px 14px 12px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-    }
-    .cv-title{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight: 600;
-      letter-spacing: .2px;
-    }
-    .cv-sub{
-      color: var(--muted2);
-      font-size: 12px;
-      margin-left: 10px;
-      font-weight: 500;
-    }
-    .cv-actions{
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
-    .iconbtn{
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      padding: 10px 12px;
-      cursor: pointer;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      font-size: 13px;
-    }
-    .iconbtn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.18);
-    }
-    .cv-body{
-      padding: 12px;
-      flex: 1;
-      min-height: 0;
-    }
-    .cv-frame{
-      width: 100%;
-      height: 100%;
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 14px;
-      background: rgba(255,255,255,.02);
-      overflow: hidden;
-    }
-    .cv-frame iframe, .cv-frame embed{
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display:block;
-    }
-    .cv-open .cv-overlay{
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .cv-open .cv-drawer{
-      transform: translateX(0);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yavuz Orhan Candemir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+html{
+scroll-behavior:smooth;
+}
+body{
+font-family:"Inter",sans-serif;
+background:
+radial-gradient(circle at top left, rgba(33,255,153,.08), transparent 24%),
+linear-gradient(180deg,#04070c 0%,#060b12 45%,#04080e 100%);
+color:#f5f7fb;
+min-height:100vh;
+}
+a{
+text-decoration:none;
+color:inherit;
+}
+button{
+font-family:inherit;
+}
+.container{
+width:min(1200px,calc(100% - 20px));
+margin:0 auto;
+padding:8px 0 26px;
+}
+.navbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px;
+margin-bottom:10px;
+padding:2px 2px 10px;
+}
+.brand{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:13px;
+font-weight:700;
+color:#f7fbff;
+}
+.brand-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:#21f59a;
+box-shadow:0 0 12px rgba(33,245,154,.9);
+}
+.nav-right{
+display:flex;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+}
+.nav-links{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
+.nav-link,.lang-btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:9px 15px;
+border-radius:999px;
+border:1px solid #253341;
+background:rgba(255,255,255,.02);
+color:#d6dfeb;
+font-size:12px;
+font-weight:600;
+transition:.2s ease;
+cursor:pointer;
+}
+.nav-link:hover,.lang-btn:hover{
+border-color:rgba(33,245,154,.35);
+color:#fff;
+transform:translateY(-1px);
+}
+.lang-switch{
+display:flex;
+gap:8px;
+}
+.lang-btn.active{
+background:rgba(33,245,154,.1);
+border-color:rgba(33,245,154,.35);
+color:#eafff3;
+}
+.layout{
+display:grid;
+grid-template-columns:minmax(0,1fr);
+gap:12px;
+}
+.top-grid{
+display:grid;
+grid-template-columns:minmax(0,1.45fr) minmax(320px,.75fr);
+gap:12px;
+}
+.lower-grid{
+display:grid;
+grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+gap:12px;
+}
+.card{
+background:linear-gradient(180deg,rgba(10,16,24,.98),rgba(7,12,18,.98));
+border:1px solid #1d2935;
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,.28);
+}
+.hero{
+padding:22px 20px 20px;
+position:relative;
+overflow:hidden;
+min-height:190px;
+}
+.hero::after{
+content:"";
+position:absolute;
+top:-60px;
+right:-80px;
+width:280px;
+height:220px;
+background:radial-gradient(circle, rgba(33,245,154,.16), transparent 62%);
+pointer-events:none;
+}
+.badge{
+display:inline-flex;
+align-items:center;
+gap:7px;
+padding:7px 12px;
+border-radius:999px;
+border:1px solid rgba(33,245,154,.24);
+background:rgba(33,245,154,.08);
+color:#e9fff2;
+font-size:11px;
+font-weight:700;
+margin-bottom:16px;
+}
+.badge::before{
+content:"";
+width:6px;
+height:6px;
+border-radius:50%;
+background:#21f59a;
+box-shadow:0 0 10px rgba(33,245,154,.9);
+}
+.hero h1{
+font-size:24px;
+font-weight:800;
+line-height:1.1;
+margin-bottom:8px;
+letter-spacing:-.02em;
+}
+.hero-sub{
+font-size:12px;
+font-weight:600;
+color:#c7d4df;
+margin-bottom:12px;
+}
+.hero-text{
+max-width:760px;
+font-size:13px;
+line-height:1.75;
+color:#93a5b6;
+margin-bottom:14px;
+}
+.chips{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:16px;
+}
+.chip{
+padding:7px 10px;
+border-radius:999px;
+border:1px solid #283848;
+background:rgba(255,255,255,.02);
+font-size:11px;
+font-weight:600;
+color:#dbe6f1;
+}
+.actions{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+}
+.btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:10px 14px;
+min-height:40px;
+border-radius:12px;
+border:1px solid #283848;
+background:#0b141d;
+color:#eff5fb;
+font-size:12px;
+font-weight:700;
+cursor:pointer;
+transition:.2s ease;
+}
+.btn:hover{
+transform:translateY(-1px);
+border-color:rgba(33,245,154,.34);
+}
+.btn.primary{
+background:linear-gradient(180deg,#23da86,#1ab56f);
+color:#041109;
+border-color:transparent;
+}
+.info{
+padding:16px 16px;
+position:relative;
+overflow:hidden;
+}
+.info::after{
+content:"";
+position:absolute;
+top:-70px;
+right:-70px;
+width:220px;
+height:220px;
+background:radial-gradient(circle, rgba(33,245,154,.12), transparent 64%);
+pointer-events:none;
+}
+.section-title{
+font-size:14px;
+font-weight:800;
+color:#f7fbff;
+margin-bottom:10px;
+}
+.info-list{
+display:flex;
+flex-direction:column;
+gap:12px;
+margin-top:4px;
+}
+.info-row{
+display:flex;
+justify-content:space-between;
+gap:14px;
+padding-bottom:10px;
+border-bottom:1px solid rgba(255,255,255,.05);
+}
+.info-row:last-child{
+border-bottom:none;
+padding-bottom:0;
+}
+.info-label{
+font-size:11px;
+font-weight:600;
+color:#8ea0b1;
+}
+.info-value{
+font-size:11px;
+font-weight:700;
+color:#eef4fb;
+text-align:right;
+max-width:165px;
+line-height:1.45;
+}
+.block{
+padding:16px;
+min-height:198px;
+}
+.block p{
+font-size:12px;
+line-height:1.78;
+color:#94a6b7;
+}
+.edu-card{
+padding:16px;
+}
+.edu-box{
+margin-top:8px;
+border:1px solid rgba(255,255,255,.06);
+border-radius:14px;
+background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.012));
+padding:14px;
+}
+.edu-top{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:12px;
+margin-bottom:10px;
+}
+.edu-title{
+font-size:16px;
+font-weight:800;
+margin-bottom:4px;
+color:#f7fbff;
+}
+.edu-school{
+font-size:12px;
+font-weight:600;
+color:#c9d6e2;
+}
+.edu-date{
+font-size:11px;
+font-weight:700;
+color:#8ea0b1;
+white-space:nowrap;
+}
+.edu-list{
+padding-left:18px;
+color:#94a6b7;
+font-size:12px;
+line-height:1.8;
+}
+.edu-list li+li{
+margin-top:2px;
+}
+.contact{
+padding:16px;
+}
+.contact p{
+font-size:12px;
+line-height:1.75;
+color:#94a6b7;
+margin-bottom:14px;
+}
+.contact-actions{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+}
+.mail-pill{
+background:rgba(33,245,154,.1);
+border-color:rgba(33,245,154,.25);
+color:#eafff3;
+}
+.cv-panel{
+display:none;
+padding:16px;
+}
+.cv-panel.show{
+display:block;
+}
+.cv-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-bottom:12px;
+}
+.cv-title{
+font-size:14px;
+font-weight:800;
+}
+.cv-note{
+font-size:11px;
+color:#8ea0b1;
+margin-top:4px;
+}
+.cv-close{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:9px 12px;
+border-radius:10px;
+border:1px solid #283848;
+background:#0b141d;
+color:#eef4fb;
+font-size:12px;
+font-weight:700;
+cursor:pointer;
+}
+.cv-viewer{
+width:100%;
+height:760px;
+border-radius:14px;
+overflow:hidden;
+border:1px solid #223240;
+background:#0a121a;
+}
+.cv-viewer iframe{
+width:100%;
+height:100%;
+border:none;
+display:block;
+background:#fff;
+}
+footer{
+text-align:center;
+font-size:11px;
+color:#687b8d;
+padding-top:4px;
+}
+@media (max-width: 980px){
+.top-grid,
+.lower-grid{
+grid-template-columns:1fr;
+}
+.cv-viewer{
+height:620px;
+}
+}
+@media (max-width: 720px){
+.navbar{
+flex-direction:column;
+align-items:flex-start;
+}
+.nav-right{
+width:100%;
+justify-content:space-between;
+}
+.hero h1{
+font-size:22px;
+}
+.info-row,
+.edu-top{
+flex-direction:column;
+}
+.info-value{
+text-align:left;
+max-width:none;
+}
+.cv-viewer{
+height:520px;
+}
+}
+@media (max-width: 480px){
+.actions .btn,
+.contact-actions .btn{
+width:100%;
+}
+.nav-right{
+flex-direction:column;
+align-items:flex-start;
+}
+}
+</style>
 </head>
-
 <body>
-  <div class="topbar">
-    <div class="inner">
-      <div class="brand">
-        <span class="dot"></span>
-        <span>Yavuz Orhan Candemir</span>
-      </div>
-      <div class="nav">
-        <a class="pill" href="#about">Hakkımda</a>
-        <a class="pill" href="#career">Kariyer</a>
-        <a class="pill" href="#projects">Projeler</a>
-        <a class="pill" href="#contact">İletişim</a>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<nav class="navbar">
+<div class="brand">
+<span class="brand-dot"></span>
+<span>Yavuz Orhan Candemir</span>
+</div>
 
-  <div class="wrap">
-    <header class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="badge"><span class="pulse"></span> Şu an projelere / staja açığım</div>
-          <h1>Yavuz Orhan Candemir</h1>
-          <p class="subtitle">
-            Minimal ama sağlam işler yapan bir <span style="color:var(--text);">Developer</span>.
-            iOS • Web • Sistemler.
-          </p>
+<div class="nav-right">
+<div class="nav-links">
+<a class="nav-link" href="#hakkimda" data-tr="Hakkımda" data-en="About">About</a>
+<a class="nav-link" href="#egitim" data-tr="Kariyer" data-en="Career">Career</a>
+<a class="nav-link" href="#iletisim" data-tr="İletişim" data-en="Contact">Contact</a>
+</div>
+<div class="lang-switch">
+<button class="lang-btn" id="trBtn" type="button">TR</button>
+<button class="lang-btn active" id="enBtn" type="button">EN</button>
+</div>
+</div>
+</nav>
 
-          <div class="meta-row">
-            <span class="chip">Warsaw / Remote</span>
-            <span class="chip">Swift • HTML/CSS • SQL</span>
-            <span class="chip">Açık: Freelance & Internship</span>
-          </div>
+<div class="layout">
+<div class="top-grid">
+<section class="card hero">
+<div class="badge" data-tr="Şu an proje / staj için açığım" data-en="Open to projects / internships right now">Open to projects / internships right now</div>
+<h1>Yavuz Orhan Candemir</h1>
+<div class="hero-sub" data-tr="Minimal ama güçlü bir yaklaşım: Otomotiv • Gömülü Sistemler • Yazılım" data-en="A minimal but strong direction: Automotive • Embedded Systems • Software">A minimal but strong direction: Automotive • Embedded Systems • Software</div>
+<p class="hero-text" data-tr="Bilgisayar mühendisliği son sınıf öğrencisiyim. Özellikle otomotiv yazılımları, araç sistemleri ve gömülü teknolojiler ile ilgileniyorum. Gerçek dünya problemlerine uygulanabilir, güvenilir ve sistematik mühendislik çözümleri üretmeyi hedefliyorum." data-en="I am a final-year computer engineering student with a strong interest in automotive software, vehicle systems, and embedded technologies. I aim to build reliable, practical, and structured engineering solutions for real-world problems.">I am a final-year computer engineering student with a strong interest in automotive software, vehicle systems, and embedded technologies. I aim to build reliable, practical, and structured engineering solutions for real-world problems.</p>
+<div class="chips">
+<span class="chip" data-tr="Uzaktan / Hibrit" data-en="Remote / Hybrid">Remote / Hybrid</span>
+<span class="chip" data-tr="Swift • HTML/CSS • SQL" data-en="Swift • HTML/CSS • SQL">Swift • HTML/CSS • SQL</span>
+<span class="chip" data-tr="Açık: Freelance & Staj" data-en="Open: Freelance & Internship">Open: Freelance & Internship</span>
+</div>
+<div class="actions">
+<button class="btn primary" type="button" onclick="toggleCV()" data-tr="CV Görüntüle" data-en="View CV">View CV</button>
+<a class="btn" href="mailto:yavuzorhancandemir@gmail.com" data-tr="Mail at" data-en="Email me">Email me</a>
+<a class="btn" href="https://github.com/Yoc0603" target="_blank" rel="noopener noreferrer">GitHub</a>
+<a class="btn" href="https://www.linkedin.com/in/yavuz-orhan-candemir/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</div>
+</section>
 
-          <div class="cta-row">
-            <a class="btn primary" href="mailto:yavuzorhancandemir@gmail.com">Mail at</a>
-            <button class="btn" type="button" data-open-cv>CV (PDF)</button>
-            <a class="btn" href="#projects">Projeleri gör</a>
-            <a class="btn" href="https://github.com/Yoc0603" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="btn" href="https://www.linkedin.com/in/yavuz-orhan-candemir/" target="_blank" rel="noreferrer">LinkedIn</a>
-          </div>
-        </div>
+<aside class="card info">
+<div class="section-title" data-tr="Hızlı Bilgiler" data-en="Quick Info">Quick Info</div>
+<div class="info-list">
+<div class="info-row">
+<div class="info-label" data-tr="Odak" data-en="Focus">Focus</div>
+<div class="info-value" data-tr="Otomotiv / Gömülü" data-en="Automotive / Embedded">Automotive / Embedded</div>
+</div>
+<div class="info-row">
+<div class="info-label" data-tr="Alanlar" data-en="Areas">Areas</div>
+<div class="info-value" data-tr="Araç Sistemleri, Mobil, Backend" data-en="Vehicle Systems, Mobile, Backend">Vehicle Systems, Mobile, Backend</div>
+</div>
+<div class="info-row">
+<div class="info-label" data-tr="Teknolojiler" data-en="Technologies">Technologies</div>
+<div class="info-value">Swift, JS, SQL</div>
+</div>
+<div class="info-row">
+<div class="info-label" data-tr="Şu an" data-en="Current Status">Current Status</div>
+<div class="info-value" data-tr="Staj arayışındayım" data-en="Looking for an internship">Looking for an internship</div>
+</div>
+<div class="info-row">
+<div class="info-label" data-tr="Dil" data-en="Language">Language</div>
+<div class="info-value" data-tr="TR / EN" data-en="EN / TR">EN / TR</div>
+</div>
+</div>
+</aside>
+</div>
 
-        <aside class="sidecard">
-          <h3>Hızlı Bilgiler</h3>
-          <div class="kv"><div class="k">Odak</div><div class="v">Mobile / Web</div></div>
-          <div class="kv"><div class="k">Stack</div><div class="v">Swift, JS, SQL</div></div>
-          <div class="kv"><div class="k">Şu an</div><div class="v">Proje geliştiriyorum</div></div>
-          <div class="kv"><div class="k">Dil</div><div class="v">TR / EN</div></div>
-        </aside>
-      </div>
-    </header>
+<div class="lower-grid">
+<section class="card block" id="hakkimda">
+<div class="section-title" data-tr="Hakkımda" data-en="About Me">About Me</div>
+<p data-tr="Detaylara önem veren, analitik düşünen ve teknik gelişimini gerçek projelerle destekleyen bir bilgisayar mühendisliği öğrencisiyim. Özellikle otomotiv ve endüstriyel teknoloji alanlarında yazılımın nasıl değer üretebileceği üzerine yoğunlaşıyorum. Mobil uygulamalar, veritabanı sistemleri ve sistem mantığı gerektiren çalışmalarla hem teknik temelimi hem de mühendislik bakış açımı güçlendirmeye devam ediyorum." data-en="I am a computer engineering student who values detail, thinks analytically, and supports technical growth through real projects. I am especially interested in how software can create value in automotive and industrial technology. Through mobile applications, database systems, and system-oriented work, I continue to strengthen both my technical foundation and engineering perspective.">I am a computer engineering student who values detail, thinks analytically, and supports technical growth through real projects. I am especially interested in how software can create value in automotive and industrial technology. Through mobile applications, database systems, and system-oriented work, I continue to strengthen both my technical foundation and engineering perspective.</p>
+</section>
 
-    <div class="grid">
-      <section id="about" class="card">
-        <h2>Hakkımda</h2>
-        <p class="muted">
-          Detaylara önem veren bir iOS developer’ım. Gerçek dünya verisini interaktif mobil deneyimlere dönüştürmeyi seviyorum.
-          Şu sıralar OBD cihazlarıyla araçtan veri alıp bunu yarış/simülasyon mantığıyla oyuna çeviren bir iOS uygulaması konsepti üzerinde çalışıyorum.
-          Swift, Xcode, Firebase; ayrıca IoT entegrasyonu ve mobil performans optimizasyonu alanlarına ilgim var.
-        </p>
-      </section>
+<section class="card edu-card" id="egitim">
+<div class="section-title" data-tr="Kariyer" data-en="Career">Career</div>
+<div style="font-size:12px;color:#94a6b7;margin-bottom:10px;" data-tr="Eğitim / yönelim / temel odaklar." data-en="Education / direction / core focus.">Education / direction / core focus.</div>
+<div class="edu-box">
+<div class="edu-top">
+<div>
+<div class="edu-title" data-tr="Bilgisayar Mühendisliği" data-en="Computer Engineering">Computer Engineering</div>
+<div class="edu-school">VIZJA University</div>
+</div>
+<div class="edu-date">2022 — 2026</div>
+</div>
+<ul class="edu-list">
+<li data-tr="Yazılım geliştirme, veritabanları ve sistem odaklı programlama alanlarında gelişim" data-en="Growth in software development, databases, and system-oriented programming">Growth in software development, databases, and system-oriented programming</li>
+<li data-tr="Otomotiv yazılımları, araç mantığı ve gömülü sistemlere özel ilgi" data-en="Strong interest in automotive software, vehicle logic, and embedded systems">Strong interest in automotive software, vehicle logic, and embedded systems</li>
+<li data-tr="Gerçek dünya problemlerine yönelik pratik ve düzenli çözümler üretmeye odaklanma" data-en="Focused on building practical and structured solutions for real-world problems">Focused on building practical and structured solutions for real-world problems</li>
+</ul>
+</div>
+</section>
+</div>
 
-      <section id="career" class="card">
-        <h2>Kariyer</h2>
-        <p class="muted">Eğitim / deneyim / önemli dönemler.</p>
+<section class="card contact" id="iletisim">
+<div class="section-title" data-tr="İletişim" data-en="Contact">Contact</div>
+<p data-tr="Proje, staj veya engineering odaklı yazılım fırsatları için benimle iletişime geçebilirsiniz. Özellikle otomotiv teknolojileri, gömülü sistemler ve sistem mantığı gerektiren alanlarda çalışmak istiyorum." data-en="You can contact me for projects, internships, or engineering-focused software opportunities. I especially want to work in automotive technologies, embedded systems, and fields that require strong system logic.">You can contact me for projects, internships, or engineering-focused software opportunities. I especially want to work in automotive technologies, embedded systems, and fields that require strong system logic.</p>
+<div class="contact-actions">
+<a class="btn mail-pill" href="mailto:yavuzorhancandemir@gmail.com">yavuzorhancandemir@gmail.com</a>
+<a class="btn" href="https://www.linkedin.com/in/yavuz-orhan-candemir/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+<a class="btn" href="https://github.com/Yoc0603" target="_blank" rel="noopener noreferrer">GitHub</a>
+<button class="btn" type="button" onclick="toggleCV()" data-tr="CV Görüntüle" data-en="View CV">View CV</button>
+</div>
+</section>
 
-        <div class="timeline">
-          <div class="item">
-            <div class="item-top">
-              <div class="role">BSc Computer Science</div>
-              <div class="period">09/2022 — 09/2026 (Expected)</div>
-            </div>
-            <div class="where">Uniwersytet VIZJA — Warsaw, Poland</div>
-            <ul>
-              <li>Relevant: OOP, Mobile App Development, Software Engineering</li>
-              <li>Data Structures & Algorithms, HCI, Database Systems, IoT</li>
-            </ul>
-          </div>
+<section class="card cv-panel" id="cvPanel">
+<div class="cv-head">
+<div>
+<div class="cv-title" data-tr="CV Önizleme" data-en="CV Preview">CV Preview</div>
+<div class="cv-note" data-tr="CV Görüntüle butonuna bastığında açılır" data-en="Opens when you click View CV">Opens when you click View CV</div>
+</div>
+<button class="cv-close" type="button" onclick="closeCV()" data-tr="Kapat" data-en="Close">Close</button>
+</div>
+<div class="cv-viewer">
+<iframe src="YavuzCV.pdf#view=FitH"></iframe>
+</div>
+</section>
 
-          <div class="item">
-            <div class="item-top">
-              <div class="role">Projeler / Dersler</div>
-              <div class="period">2024 — 2025</div>
-            </div>
-            <div class="where">Kısa açıklama</div>
-            <ul>
-              <li>Database projesi: normalizasyon + view/procedure/trigger.</li>
-              <li>Linux 6.x: process hierarchy analizi (syscall).</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
+<footer data-tr="© 2026 Yavuz Orhan Candemir • Minimal portfolyo" data-en="© 2026 Yavuz Orhan Candemir • Minimal portfolio">© 2026 Yavuz Orhan Candemir • Minimal portfolio</footer>
+</div>
 
-    <section id="projects" class="card" style="margin-top:14px;">
-      <h2>Projeler</h2>
-      <p class="muted">En iyi projelerim.</p>
+<script>
+function toggleCV(){
+const panel=document.getElementById("cvPanel");
+panel.classList.add("show");
+panel.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function closeCV(){
+const panel=document.getElementById("cvPanel");
+panel.classList.remove("show");
+}
 
-      <div class="projects">
-        <div class="proj">
-          <a href="#" rel="noreferrer"><strong>Real Estate Price Prediction</strong> ↗</a>
-          <p>Veri hazırlama → modelleme → değerlendirme. Minimal bir özet.</p>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">ML</span>
-            <span class="tag">Regression</span>
-          </div>
-        </div>
+function setLanguage(lang){
+document.documentElement.lang=lang;
 
-        <div class="proj">
-          <a href="#" rel="noreferrer"><strong>Hospital Appointment App</strong> ↗</a>
-          <p>Kart tabanlı UI, randevu slot yönetimi, “My Appointments”.</p>
-          <div class="tags">
-            <span class="tag">Android</span>
-            <span class="tag">SQLite</span>
-            <span class="tag">UI</span>
-          </div>
-        </div>
+document.querySelectorAll("[data-tr]").forEach(function(el){
+const value=el.getAttribute("data-"+lang);
+if(value){
+el.textContent=value;
+}
+});
 
-        <div class="proj">
-          <a href="#" rel="noreferrer"><strong>Barcode Scanner</strong> ↗</a>
-          <p>Barcode → DB kontrol → yes/no dönüş. Hızlı ve sade.</p>
-          <div class="tags">
-            <span class="tag">Mobile</span>
-            <span class="tag">DB</span>
-            <span class="tag">UX</span>
-          </div>
-        </div>
+document.getElementById("trBtn").classList.toggle("active",lang==="tr");
+document.getElementById("enBtn").classList.toggle("active",lang==="en");
+}
 
-        <div class="proj">
-          <a href="#" rel="noreferrer"><strong>Elixir Stopwatch</strong> ↗</a>
-          <p>State machine: ready/running/stopped, lap tracking.</p>
-          <div class="tags">
-            <span class="tag">Elixir</span>
-            <span class="tag">State</span>
-            <span class="tag">CLI</span>
-          </div>
-        </div>
-      </div>
-    </section>
+document.getElementById("trBtn").addEventListener("click",function(){
+setLanguage("tr");
+});
 
-    <section id="contact" class="card" style="margin-top:14px;">
-      <h2>İletişim</h2>
-      <p class="muted">
-        Proje, staj veya freelance için mail atman yeterli. Genelde hızlı dönerim.
-      </p>
-      <div class="contact">
-        <a class="btn primary" href="mailto:yavuzorhancandemir@gmail.com">yavuzorhancandemir@gmail.com</a>
-        <a class="btn" href="https://www.linkedin.com/in/yavuz-orhan-candemir/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="btn" href="https://github.com/Yoc0603" target="_blank" rel="noreferrer">GitHub</a>
-        <button class="btn" type="button" data-open-cv>CV (PDF)</button>
-      </div>
-    </section>
+document.getElementById("enBtn").addEventListener("click",function(){
+setLanguage("en");
+});
 
-    <footer>
-      © <span id="y"></span> Yavuz Orhan Candemir • Minimal portfolio
-    </footer>
-  </div>
-
-  <!-- CV Drawer -->
-  <div class="cv-overlay" data-close-cv></div>
-  <aside class="cv-drawer" aria-hidden="true" aria-label="CV Drawer">
-    <div class="cv-header">
-      <div class="cv-title">
-        <span class="dot"></span>
-        <span>CV</span>
-        <span class="cv-sub">Yavuz Orhan Candemir</span>
-      </div>
-      <div class="cv-actions">
-        <a class="iconbtn" href="YavuzCV.pdf" download>Download</a>
-        <button class="iconbtn" type="button" data-close-cv>Close</button>
-      </div>
-    </div>
-    <div class="cv-body">
-      <div class="cv-frame">
-        <iframe src="YavuzCV.pdf#view=FitH" title="Yavuz Orhan Candemir CV"></iframe>
-      </div>
-    </div>
-  </aside>
-
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-
-    const openBtns = document.querySelectorAll("[data-open-cv]");
-    const closeBtns = document.querySelectorAll("[data-close-cv]");
-    const drawer = document.querySelector(".cv-drawer");
-
-    function openCV(){
-      document.body.classList.add("cv-open");
-      drawer.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeCV(){
-      document.body.classList.remove("cv-open");
-      drawer.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
-
-    openBtns.forEach(b => b.addEventListener("click", openCV));
-    closeBtns.forEach(b => b.addEventListener("click", closeCV));
-
-    window.addEventListener("keydown", (e) => {
-      if(e.key === "Escape") closeCV();
-    });
-  </script>
+setLanguage("en");
+</script>
 </body>
 </html>
